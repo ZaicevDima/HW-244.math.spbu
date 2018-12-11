@@ -7,7 +7,7 @@ public class InfectRandom implements ComputerRandom {
     private static Random random;
 
     /** Create random */
-    InfectRandom(){
+    InfectRandom() {
         random = new Random();
     }
 

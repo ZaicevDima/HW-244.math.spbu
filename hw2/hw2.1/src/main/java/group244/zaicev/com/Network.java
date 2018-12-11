@@ -47,8 +47,8 @@ public class Network {
             }
             builder.append("\n");
         }
-
         builder.append("\n");
+
         return builder.toString();
     }
 
@@ -75,8 +75,8 @@ public class Network {
             }
             table.append("\n");
         }
-
         table.append("\n");
+
         return table.toString();
     }
 
@@ -91,7 +91,6 @@ public class Network {
         for (int i = 0; i < OSList.size(); i++) {
             computers[i] = new Computer(OSList.get(i), random);
         }
-
         computers[infect - 1].infect();
 
         return computers;
@@ -115,7 +114,6 @@ public class Network {
             matrix[connection[0] - 1][connection[1] - 1] = true;
             matrix[connection[1] - 1][connection[0] - 1] = true;
         }
-
 
         return matrix;
     }

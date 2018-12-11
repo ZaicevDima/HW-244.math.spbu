@@ -1,6 +1,5 @@
 package group244.zaicev.com;
 
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,8 +26,8 @@ public class Main {
             }
             OSList.add(name);
         }
-        return OSList;
 
+        return OSList;
     }
 
     /**
@@ -48,6 +47,7 @@ public class Main {
                 connections[i][1] = in.nextInt();
             }
         }
+
         return connections;
     }
 
@@ -69,7 +69,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
         Scanner in = new Scanner(System.in);
         ArrayList<String> OSList = enterNameOS(in);
 
