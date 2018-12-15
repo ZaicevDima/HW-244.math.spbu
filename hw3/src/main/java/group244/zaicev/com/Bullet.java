@@ -4,15 +4,12 @@ import com.sun.javafx.geom.Vec2d;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-/** Bullet class. */
+/** Class for working with Bullet */
 public class Bullet implements Coordinate {
-    private static final int MAX_WIDTH = 1000;
-    private static final int MAX_HEIGHT = 765;
-    private static final int BULLET_SIZE = 20;
-    private final GraphicsContext gc;
+    private final GraphicsContext graphicsContext;
     private final Image bullet;
 
-    private boolean exploded = false;
+    private boolean isDestroyed = false;
 
     private int x0;
     private int y0;
@@ -22,9 +19,9 @@ public class Bullet implements Coordinate {
     private double speedX;
     private double speedY;
 
-    /** Create Bullet. */
+    /** Constructor */
     Bullet(GraphicsContext gc, Vec2d startCoord, double speedX, double speedY) {
-        this.gc = gc;
+        this.graphicsContext = gc;
         this.speedX = speedX;
         this.speedY = speedY;
         this.timer = 0;
@@ -53,26 +50,29 @@ public class Bullet implements Coordinate {
         this.y = y;
     }
 
-    /** Draw Bullet. */
+    /** Metod for drawing bullet */
     public void draw() {
-        gc.drawImage(bullet, x - BULLET_SIZE / 2, y - BULLET_SIZE / 2);
+        int bulletSize = 10;
+        graphicsContext.drawImage(bullet, x - bulletSize / 2, y - bulletSize / 2);
         x = x0 + (int) (speedX * timer);
         double g = 0.5;
         y = (y0 - (int) (speedY * timer - g * timer * timer / 2));
         timer += 0.5;
 
-        if ((x < 0) || (x > MAX_WIDTH) || (y < 0) || (y > MAX_HEIGHT)) {
-            explode();
+        int maxWidth = 1000;
+        int maxHeight = 700;
+        if ((x < 0) || (x > maxWidth) || (y < 0) || (y > maxHeight)) {
+            destroy();
         }
     }
 
-    /** Explode Bullet. */
-    public void explode() {
-        exploded = true;
+    /** Destruction bullet */
+    public void destroy() {
+        isDestroyed = true;
     }
 
-    /** Check bullet's destruction. */
-    public boolean isExploded() {
-        return exploded;
+    /** Method for check bullet's destruction */
+    public boolean isDestroyed() {
+        return isDestroyed;
     }
 }
