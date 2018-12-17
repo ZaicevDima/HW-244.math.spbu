@@ -2,19 +2,21 @@ package group244.zaicev.com;
 
 import com.sun.javafx.geom.Vec2d;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /** Class for working with weapon */
 public class Weapon implements Coordinate {
-    private static int GUN_SIZE = 20;
+    private static final int GUN_SIZE = 20;
 
-    private final GraphicsContext gc;
+    private final GraphicsContext graphicsContext;
+
     private int x;
     private int y;
     private int fi;
 
     /** Constructor */
     Weapon (GraphicsContext gc, int x, int y) {
-        this.gc = gc;
+        this.graphicsContext = gc;
         this.x = x;
         this.y = y;
         this.fi = -45;
@@ -67,10 +69,11 @@ public class Weapon implements Coordinate {
 
     /** Method for drawing weapon */
     public void draw() {
-        gc.setLineWidth(8);
-        gc.strokeLine(x, y, x + Math.cos(Math.PI * fi / 180) * GUN_SIZE, y + Math.sin(Math.PI * fi / 180) * GUN_SIZE);
+        graphicsContext.setFill(Color.GREEN);
+        graphicsContext.setLineWidth(8);
+        graphicsContext.strokeLine(x, y, x + Math.cos(Math.PI * fi / 180) * GUN_SIZE, y + Math.sin(Math.PI * fi / 180) * GUN_SIZE);
         int weaponSize = 40;
-        gc.strokeLine(x - weaponSize / 3, y, x + weaponSize / 3, y);
+        graphicsContext.strokeLine(x - weaponSize / 3, y, x + weaponSize / 3, y);
     }
 
     /** Method that implements the shot */
@@ -82,6 +85,6 @@ public class Weapon implements Coordinate {
         double startFi = (Math.PI * fi / 180);
         Vec2d startCoord = new Vec2d((x + Math.cos(startFi) * GUN_SIZE) + 5, (y + Math.sin(startFi) * GUN_SIZE));
 
-        return new Bullet(gc, startCoord, speedX * 2, speedY * 3);
+        return new Bullet(graphicsContext, startCoord, speedX * 2, speedY * 3);
     }
 }
