@@ -41,6 +41,26 @@ public class NetworkTest {
         return s.contains("is infected");
     }
 
+
+
+    /** Create predictable random */
+    class PredictableRandom implements ComputerRandom {
+        @Override
+        public boolean infectWindows() {
+            return true;
+        }
+
+        @Override
+        public boolean infectLinux() {
+            return true;
+        }
+
+        @Override
+        public boolean infectMac() {
+            return true;
+        }
+    }
+
     @Test
     public void correctInfectionTest() {
         createOSList();
@@ -70,6 +90,68 @@ public class NetworkTest {
             }
         }
     }
+
+    @Test
+    public void correctInfectionPredictableRandomTest() {
+        createOSList();
+        createConnections();
+        int infect = 3;
+        Network network = new  Network(OSList, connections, infect, new PredictableRandom());
+        String[] config = network.getStatus().split("\n");
+        assertTrue("Infection error", !isVirus(config[0]) && !isVirus(config[1])
+                && isVirus(config[2]) && !isVirus(config[3]) && !isVirus(config[4])
+                && !isVirus(config[5]));
+
+        network.timeStep();
+        config = network.getStatus().split("\n");
+        assertTrue("Infection error", isVirus(config[0]) && !isVirus(config[1])
+                && isVirus(config[2]) && !isVirus(config[3]) && isVirus(config[4])
+                && !isVirus(config[5]));
+
+        network.timeStep();
+        config = network.getStatus().split("\n");
+        assertTrue("Infection error", isVirus(config[0]) && isVirus(config[1])
+                && isVirus(config[2]) && isVirus(config[3]) && isVirus(config[4])
+                && isVirus(config[5]));
+    }
+
+
+    @Test
+    public void secondCorrectInfectionPredictableRandomTest() {
+        createOSList();
+        createConnections();
+        int infect = 2;
+        Network network = new  Network(OSList, connections, infect, new PredictableRandom());
+        String[] config = network.getStatus().split("\n");
+        assertTrue("Infection error", !isVirus(config[0]) && isVirus(config[1])
+                && !isVirus(config[2]) && !isVirus(config[3]) && !isVirus(config[4])
+                && !isVirus(config[5]));
+
+        network.timeStep();
+        config = network.getStatus().split("\n");
+        assertTrue("Infection error", isVirus(config[0]) && isVirus(config[1])
+                && !isVirus(config[2]) && !isVirus(config[3]) && !isVirus(config[4])
+                && !isVirus(config[5]));
+
+        network.timeStep();
+        config = network.getStatus().split("\n");
+        assertTrue("Infection error", isVirus(config[0]) && isVirus(config[1])
+                && isVirus(config[2]) && !isVirus(config[3]) && !isVirus(config[4])
+                && !isVirus(config[5]));
+
+        network.timeStep();
+        config = network.getStatus().split("\n");
+        assertTrue("Infection error", isVirus(config[0]) && isVirus(config[1])
+                && isVirus(config[2]) && !isVirus(config[3]) && isVirus(config[4])
+                && !isVirus(config[5]));
+
+        network.timeStep();
+        config = network.getStatus().split("\n");
+        assertTrue("Infection error", isVirus(config[0]) && isVirus(config[1])
+                && isVirus(config[2]) && isVirus(config[3]) && isVirus(config[4])
+                && isVirus(config[5]));
+    }
+
 
     @Test
     public void getStructureTest() {
