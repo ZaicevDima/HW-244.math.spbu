@@ -131,7 +131,9 @@ public class BinaryTreeTest {
         tree.add(2);
 
         int size = 0;
+        int[] correctBypass = {-5, -3, -1, 0, 2, 3, 4, 5};
         for(Integer ignored : tree) {
+            Assert.assertEquals(correctBypass[size], ignored.intValue());
             size++;
         }
 

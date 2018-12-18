@@ -18,14 +18,43 @@ public class BinaryTree<Type extends Comparable<Type>> implements Iterable<Type>
      */
     public void add(Type value) {
         if (isEmpty()) {
-            root = new Node<>(value);
+            root = new group244.zaicev.com.Node<>(value);
             size++;
             return;
         }
 
-        boolean isAdded = root.add(value);
+        boolean isAdded = add(root, value);
         if (isAdded) {
             size++;
+        }
+    }
+
+    /**
+     * realize adding node
+     *
+     * @param node root of your subtree
+     * @param value new value
+     * @return false, if this value is contains in the tree, else true
+     */
+    private boolean add(Node<Type> node, Type value) {
+        if (node.getValue().equals(value)) {
+            return false;
+        }
+
+        if (value.compareTo(node.getValue()) > 0) {
+            if (node.getRight() == null) {
+                node.setRight(new Node<>(value));
+                node.getRight().setParent(node);
+                return true;
+            }
+            return add(node.getRight(), value);
+        } else {
+            if (node.getLeft() == null) {
+                node.setLeft(new Node<>(value));
+                node.getLeft().setParent(node);
+                return true;
+            }
+            return add(node.getLeft(), value);
         }
     }
 
@@ -35,7 +64,30 @@ public class BinaryTree<Type extends Comparable<Type>> implements Iterable<Type>
      * @return true, if contained, else false
      */
     public boolean isContains(Type value) {
-        return (root != null) && (root.isContains(value));
+        return (root != null) && (isContains(root, value));
+    }
+
+    /**
+     * Checks if the tree contains this value
+     *
+     * @param node the root of your subtree
+     * @param value which you want to check
+     * @return true, if tree contains this value, else false
+     */
+    private boolean isContains(Node<Type> node, Type value) {
+        if (node == null) {
+            return false;
+        }
+
+        if (node.getValue().equals(value)) {
+            return true;
+        }
+
+        if (value.compareTo(node.getValue()) > 0) {
+            return isContains(node.getRight(), value);
+        } else {
+            return isContains(node.getLeft(), value);
+        }
     }
 
     /**
@@ -51,7 +103,7 @@ public class BinaryTree<Type extends Comparable<Type>> implements Iterable<Type>
      * @param node start searching for delete value
      * @param value value, wich you want to delete
      */
-    private void remove(Node<Type> node, Type value) {
+    private void remove(group244.zaicev.com.Node<Type> node, Type value) {
         if (node == null) {
             return;
         }
@@ -73,13 +125,13 @@ public class BinaryTree<Type extends Comparable<Type>> implements Iterable<Type>
      * Removes node from tree
      * @param node node, wich you want to remove
      */
-    private void removeNode(Node<Type> node) {
-        Node<Type> tempNode;
+    private void removeNode(group244.zaicev.com.Node<Type> node) {
+        group244.zaicev.com.Node<Type> tempNode;
 
         if ((node.getRight() != null) && (node.getLeft() != null)) {
             tempNode = node.getLeft();
 
-            Node<Type> temp = tempNode;
+            group244.zaicev.com.Node<Type> temp = tempNode;
             while (temp.getRight() != null) {
                 temp = temp.getRight();
             }
@@ -135,8 +187,8 @@ public class BinaryTree<Type extends Comparable<Type>> implements Iterable<Type>
      * Class for working with Binary Tree iterator of any type
      */
     public class BinaryTreeIterator implements Iterator<Type> {
-        private Node<Type> current;
-        private Node<Type> next;
+        private group244.zaicev.com.Node<Type> current;
+        private group244.zaicev.com.Node<Type> next;
 
         /**
          * Constructor for Iterator
@@ -174,16 +226,16 @@ public class BinaryTree<Type extends Comparable<Type>> implements Iterable<Type>
         /**
          * Returns next node
          */
-        private Node<Type> getNext() {
+        private group244.zaicev.com.Node<Type> getNext() {
             if (next.getRight() != null) {
-                Node<Type> temp = next.getRight();
+                group244.zaicev.com.Node<Type> temp = next.getRight();
                 while (temp.getLeft() != null) {
                     temp = temp.getLeft();
                 }
                 return temp;
             }
 
-            Node<Type> temp = next;
+            group244.zaicev.com.Node<Type> temp = next;
             while ((temp.getParent() != null) && (temp.equals(temp.getParent().getRight()))) {
                 temp = temp.getParent();
             }
