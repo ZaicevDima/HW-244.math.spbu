@@ -18,7 +18,7 @@ public class BinaryTree<Type extends Comparable<Type>> implements Iterable<Type>
      */
     public void add(Type value) {
         if (isEmpty()) {
-            root = new group244.zaicev.com.Node<>(value);
+            root = new Node<>(value);
             size++;
             return;
         }
@@ -103,7 +103,7 @@ public class BinaryTree<Type extends Comparable<Type>> implements Iterable<Type>
      * @param node start searching for delete value
      * @param value value, wich you want to delete
      */
-    private void remove(group244.zaicev.com.Node<Type> node, Type value) {
+    private void remove(Node<Type> node, Type value) {
         if (node == null) {
             return;
         }
@@ -125,13 +125,13 @@ public class BinaryTree<Type extends Comparable<Type>> implements Iterable<Type>
      * Removes node from tree
      * @param node node, wich you want to remove
      */
-    private void removeNode(group244.zaicev.com.Node<Type> node) {
-        group244.zaicev.com.Node<Type> tempNode;
+    private void removeNode(Node<Type> node) {
+        Node<Type> tempNode;
 
         if ((node.getRight() != null) && (node.getLeft() != null)) {
             tempNode = node.getLeft();
 
-            group244.zaicev.com.Node<Type> temp = tempNode;
+            Node<Type> temp = tempNode;
             while (temp.getRight() != null) {
                 temp = temp.getRight();
             }
@@ -187,8 +187,8 @@ public class BinaryTree<Type extends Comparable<Type>> implements Iterable<Type>
      * Class for working with Binary Tree iterator of any type
      */
     public class BinaryTreeIterator implements Iterator<Type> {
-        private group244.zaicev.com.Node<Type> current;
-        private group244.zaicev.com.Node<Type> next;
+        private Node<Type> current;
+        private Node<Type> next;
 
         /**
          * Constructor for Iterator
@@ -226,16 +226,16 @@ public class BinaryTree<Type extends Comparable<Type>> implements Iterable<Type>
         /**
          * Returns next node
          */
-        private group244.zaicev.com.Node<Type> getNext() {
+        private Node<Type> getNext() {
             if (next.getRight() != null) {
-                group244.zaicev.com.Node<Type> temp = next.getRight();
+                Node<Type> temp = next.getRight();
                 while (temp.getLeft() != null) {
                     temp = temp.getLeft();
                 }
                 return temp;
             }
 
-            group244.zaicev.com.Node<Type> temp = next;
+            Node<Type> temp = next;
             while ((temp.getParent() != null) && (temp.equals(temp.getParent().getRight()))) {
                 temp = temp.getParent();
             }
