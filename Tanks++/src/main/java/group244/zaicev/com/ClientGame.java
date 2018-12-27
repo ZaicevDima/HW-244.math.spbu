@@ -24,7 +24,6 @@ public class ClientGame extends Game {
         this.ipAddress = Objects.requireNonNull(ipAddress);
     }
 
-
     @Override
     protected void initUnderLock() {
         InetAddress inetAddress = null;

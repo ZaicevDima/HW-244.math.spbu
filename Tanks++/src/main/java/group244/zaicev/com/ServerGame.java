@@ -30,7 +30,6 @@ public class ServerGame extends Game {
         }
     }
 
-
     @Override
     protected void initUnderLock() {
         if (client == null) {

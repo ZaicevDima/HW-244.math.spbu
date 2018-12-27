@@ -116,14 +116,12 @@ public abstract class Projectile implements Coordinate {
         this.y0 = y0;
     }
 
-
     /**
      * Sets speed x
      */
     void setSpeedX(double speedX) {
         this.speedX = speedX;
     }
-
 
     /**
      * Sets speed y
