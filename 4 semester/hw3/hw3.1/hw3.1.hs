@@ -4,7 +4,7 @@ module PointFree where
 original function:
 func x l = map (\y -> y*x) l
 
-reducion l:
+reduction l:
 func x = map (\y -> y*x)   
 
 reduction lambda
