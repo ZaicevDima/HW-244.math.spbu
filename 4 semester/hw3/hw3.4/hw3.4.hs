@@ -18,6 +18,5 @@ checkCBS string = checkCBS' string "" where
 
     isOpenBracket x = if (x == '(' || x == '{' || x == '[') then True else False
     isCloseBracket x = if (x == ')' || x == '}' || x == ']') then True else False
-    isBracket x = isOpenBracket x || isCloseBracket x
     isSameType x y = elem(x, y) [('(', ')'), ('{', '}'), ('[', ']')]
 
