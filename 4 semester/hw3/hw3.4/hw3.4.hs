@@ -1,5 +1,6 @@
 module CorrectBracketSequence where
 
+checkCBS :: [Char] -> Bool
 checkCBS string = checkCBS' string "" where
     checkCBS' "" "" = True
     checkCBS' (x:xs) "" 
