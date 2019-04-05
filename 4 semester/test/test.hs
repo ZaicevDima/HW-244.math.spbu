@@ -1,10 +1,9 @@
 --1
-numbers :: [Integer]
+numbers :: [Int]
 numbers = zipWith (*) listOfSigns [1,2..] where
     listOfSigns = 1:(-1):listOfSigns
 
 --2
-
 matrix :: Int -> [[Int]]
 matrix n = (map (\x -> map' x) [1..n]) where
     map' x = map (\y -> (if y > x then y else x)) [1..n]
