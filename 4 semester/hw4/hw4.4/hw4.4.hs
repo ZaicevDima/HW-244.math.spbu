@@ -5,6 +5,7 @@ data Monom = Monom (Integer, Integer)
 instance Show Monom where
     show(Monom(0, _)) = ""
     show(Monom(coef, 0)) = (show coef)
+    show(Monom(1, 1)) = "x"
     show(Monom(coef, 1)) = (show coef) ++ "x"
     show(Monom(1, degree)) = "x^" ++ (show degree)
     show(Monom(coef, degree)) = (show coef) ++ "x^" ++ (show degree)
@@ -29,5 +30,4 @@ simplify (Polynom polynom) = Polynom (simplify' polynom) where
         sumPolynoms' ((Monom (coef, pow)):xs) = (Monom (coef + sum (map getCoef xs), pow))
         getCoef (Monom (coef, pow)) = coef
         groupByPow = groupBy (\(Monom (coef1, pow1)) -> \(Monom (coef2, pow2)) -> (pow1 == pow2)) sort
-        sort = sortOn (\(Monom (coef,pow)) -> pow) polynom        
-
+        sort = sortOn (\(Monom (coef,pow)) -> pow) polynom   
